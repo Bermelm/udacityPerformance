@@ -22,25 +22,25 @@ from opencensus.trace.tracer import Tracer
 
 # Logging
 logger = logging.getLogger(__name__)
-handler = AzureLogHandler(connection_string='InstrumentationKey=03d3c628-ee31-4ec6-8f2d-0f631355e677;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/')
+handler = AzureLogHandler(connection_string='InstrumentationKey=ad9e7757-745d-4b47-95ae-4885a3ed44ee;IngestionEndpoint=https://uksouth-1.in.applicationinsights.azure.com/;LiveEndpoint=https://uksouth.livediagnostics.monitor.azure.com/')
 logger.addHandler(handler)
 logger.setLevel(logging.INFO)
 
 # Metrics
 exporter = metrics_exporter.new_metrics_exporter(
   enable_standard_metrics=True,
-  connection_string='InstrumentationKey=03d3c628-ee31-4ec6-8f2d-0f631355e677;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/')
+  connection_string='InstrumentationKey=ad9e7757-745d-4b47-95ae-4885a3ed44ee;IngestionEndpoint=https://uksouth-1.in.applicationinsights.azure.com/;LiveEndpoint=https://uksouth.livediagnostics.monitor.azure.com/')
 
 # Tracing
 tracer = Tracer(
     exporter=AzureExporter(
-        connection_string='InstrumentationKey=03d3c628-ee31-4ec6-8f2d-0f631355e677;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/'),
+        connection_string='InstrumentationKey=ad9e7757-745d-4b47-95ae-4885a3ed44ee;IngestionEndpoint=https://uksouth-1.in.applicationinsights.azure.com/;LiveEndpoint=https://uksouth.livediagnostics.monitor.azure.com/'),
     sampler=ProbabilitySampler(1.0),
 )
 
 # Event logger
 eventlogger = logging.getLogger(__name__)
-eventhandler = AzureEventHandler(connection_string='InstrumentationKey=03d3c628-ee31-4ec6-8f2d-0f631355e677;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/')
+eventhandler = AzureEventHandler(connection_string='InstrumentationKey=ad9e7757-745d-4b47-95ae-4885a3ed44ee;IngestionEndpoint=https://uksouth-1.in.applicationinsights.azure.com/;LiveEndpoint=https://uksouth.livediagnostics.monitor.azure.com/')
 eventlogger.addHandler(eventhandler)
 eventlogger.setLevel(logging.INFO)
 
@@ -49,7 +49,7 @@ app = Flask(__name__)
 # Requests
 middleware = FlaskMiddleware(
     app,
-    exporter=AzureExporter(connection_string="InstrumentationKey=03d3c628-ee31-4ec6-8f2d-0f631355e677;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/"),
+    exporter=AzureExporter(connection_string="InstrumentationKey=ad9e7757-745d-4b47-95ae-4885a3ed44ee;IngestionEndpoint=https://uksouth-1.in.applicationinsights.azure.com/;LiveEndpoint=https://uksouth.livediagnostics.monitor.azure.com/"),
     sampler=ProbabilitySampler(rate=1.0),
 )
 
