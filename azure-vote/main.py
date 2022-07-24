@@ -27,7 +27,7 @@ app = Flask(__name__)
 
 # Load configurations from environment or config file
 app.config.from_pyfile('config_file.cfg')
-instrumentation_key = app.config['APP_INSIGHTS_INSTRUMENTATION_KEY']
+instrumentation_key = "ad9e7757-745d-4b47-95ae-4885a3ed44ee"
 
 # Logging
 logger = logging.getLogger(__name__)
