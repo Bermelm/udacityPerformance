@@ -26,24 +26,24 @@ app = Flask(__name__)
 # Requests
 middleware = FlaskMiddleware(
     app,
-    exporter=AzureExporter(connection_string='InstrumentationKey=296b88d3-3925-4bfb-a62b-649603cdb52d'),
+    exporter=AzureExporter(connection_string='InstrumentationKey=296b88d3-3925-4bfb-a62b-649603cdb52d;IngestionEndpoint=https://uksouth-1.in.applicationinsights.azure.com/;LiveEndpoint=https://uksouth.livediagnostics.monitor.azure.com/'),
     sampler=ProbabilitySampler(rate=1.0),
 )
 # TODO: Setup flask middleware
 
 # Logging
 logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler(connection_string='InstrumentationKey=296b88d3-3925-4bfb-a62b-649603cdb52d'))
+logger.addHandler(AzureLogHandler(connection_string='InstrumentationKey=296b88d3-3925-4bfb-a62b-649603cdb52d;IngestionEndpoint=https://uksouth-1.in.applicationinsights.azure.com/;LiveEndpoint=https://uksouth.livediagnostics.monitor.azure.com/'))
 
 # Metrics TODO: Setup exporter
 exporter = metrics_exporter.new_metrics_exporter(
     enable_standard_metrics=True,
-    connection_string='InstrumentationKey=296b88d3-3925-4bfb-a62b-649603cdb52d'
+    connection_string='InstrumentationKey=296b88d3-3925-4bfb-a62b-649603cdb52d;IngestionEndpoint=https://uksouth-1.in.applicationinsights.azure.com/;LiveEndpoint=https://uksouth.livediagnostics.monitor.azure.com/'
 )
 # Tracing
 tracer = Tracer(
     exporter = AzureExporter(
-        connection_string = 'InstrumentationKey=296b88d3-3925-4bfb-a62b-649603cdb52d'),
+        connection_string='InstrumentationKey=296b88d3-3925-4bfb-a62b-649603cdb52d;IngestionEndpoint=https://uksouth-1.in.applicationinsights.azure.com/;LiveEndpoint=https://uksouth.livediagnostics.monitor.azure.com/'),
     sampler = ProbabilitySampler(1.0),
 )
 
